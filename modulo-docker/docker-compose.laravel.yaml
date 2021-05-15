@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.prod
+    image: gibrantavares/nginx:prod
+    container_name: nginx
+    networks:
+      - laranet
+    ports:
+      - "8080:80"
+
+  laravel:
+    build:
+      context: ./laravel
+      dockerfile: Dockerfile.prod
+    image: gibrantavares/laravel:prod
+    container_name: laravel
+    networks:
+      - laranet
+
+networks:
+  laranet:
+    driver: bridge
